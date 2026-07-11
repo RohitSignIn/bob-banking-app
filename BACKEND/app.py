@@ -210,6 +210,19 @@ def withdraw():
 
     if request.method == "POST":
         raw_amount = request.form.get("amount", "")
+        if not raw_amount or not raw_amount.strip():
+            error = "Amount is required"
+            return render_template("withdraw.html", balance=account["balance"], error=error)
+        try:
+            _amount = float(raw_amount)
+        except ValueError:
+            _amount = 0
+        if _amount <= 0:
+            error = "Amount must be greater than zero"
+            return render_template("withdraw.html", balance=account["balance"], error=error)
+        if _amount > account["balance"]:
+            error = "Insufficient funds"
+            return render_template("withdraw.html", balance=account["balance"], error=error)
         result = process_withdrawal(customer_id, raw_amount)
 
         if result.success:
