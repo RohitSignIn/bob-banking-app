@@ -1,0 +1,71 @@
+/* =========================================================
+   styles.css  —  SecureBank custom overrides
+   Bootstrap handles the majority of styling.
+   Only project-specific tweaks belong here.
+   ========================================================= */
+
+/* ── Body & layout ── */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+
+main.container {
+  flex: 1;
+}
+
+/* ── Balance card gradient accent ── */
+.balance-card {
+  background: linear-gradient(135deg, #eef4ff 0%, #f0f7ff 100%);
+  border-left: 4px solid #3b82f6 !important;
+}
+
+/* ── Quick action tiles ── */
+.quick-action-tile {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.quick-action-tile:hover {
+  background-color: #e8f0fe;
+  border-color: #93b4f9;
+}
+
+/* ── Navbar brand ── */
+.navbar-brand {
+  letter-spacing: 0.02em;
+}
+
+/* ── Form cards ── */
+.card {
+  border-radius: 0.75rem;
+}
+
+.card-header {
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+/* ── Badge letter spacing ── */
+.tracking-wide {
+  letter-spacing: 0.06em;
+}
+
+/* ── Table zebra-stripe tweak ── */
+.table > tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+/* ── Input group icon alignment ── */
+.input-group-text {
+  min-width: 2.5rem;
+  justify-content: center;
+}
+
+/* ── Footer ── */
+footer {
+  font-size: 0.8rem;
+}

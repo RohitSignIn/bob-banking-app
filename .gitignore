@@ -1,0 +1,26 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+
+# SQLite database
+*.db
+*.db-shm
+*.db-wal
+
+# Pytest cache
+.pytest_cache/
+
+# Bob internal
+.bob/
+
+# Docs demo setup
+docs/
+
+# OS
+.DS_Store
+Thumbs.db

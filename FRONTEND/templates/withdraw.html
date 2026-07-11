@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Withdraw Funds — SecureBank{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{ url_for('dashboard') }}" class="text-decoration-none">
+            <i class="bi bi-speedometer2 me-1"></i>Dashboard
+          </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Withdraw</li>
+      </ol>
+    </nav>
+
+    <!-- Withdraw card -->
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-warning py-3">
+        <h2 class="h5 mb-0 fw-semibold text-dark">
+          <i class="bi bi-dash-circle me-2"></i>Withdraw Funds
+        </h2>
+      </div>
+
+      <div class="card-body p-4">
+
+        <!-- Available balance display -->
+        <div class="alert alert-info d-flex align-items-center mb-4" role="status">
+          <i class="bi bi-wallet2 fs-5 me-3 text-info"></i>
+          <div>
+            <div class="small text-muted fw-semibold">AVAILABLE BALANCE</div>
+            <div class="fs-5 fw-bold text-primary">£{{ "%.2f"|format(balance) }}</div>
+          </div>
+        </div>
+
+        <!-- Error alert -->
+        {% if error %}
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <p class="text-muted mb-4">
+          Enter the amount you wish to withdraw. You can withdraw up to your
+          full available balance shown above.
+        </p>
+
+        <!-- Withdraw form — POSTs to /withdraw -->
+        <form action="{{ url_for('withdraw') }}" method="POST" novalidate>
+
+          <div class="mb-4">
+            <label for="amount" class="form-label fw-semibold">Withdrawal Amount (£)</label>
+            <div class="input-group input-group-lg">
+              <span class="input-group-text fw-bold">£</span>
+              <input
+                type="number"
+                class="form-control"
+                id="amount"
+                name="amount"
+                placeholder="0.00"
+                min="0.01"
+                max="{{ balance }}"
+                step="0.01"
+                autofocus
+                required
+              />
+            </div>
+            <div class="form-text">
+              Maximum withdrawal: £{{ "%.2f"|format(balance) }}
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-warning btn-lg fw-semibold">
+              <i class="bi bi-dash-circle me-2"></i>Confirm Withdrawal
+            </button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+            </a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- Security note -->
+    <div class="text-center mt-3 text-muted small">
+      <i class="bi bi-shield-lock me-1"></i>
+      All transactions are securely processed and recorded.
+    </div>
+
+  </div>
+</div>
+{% endblock %}
